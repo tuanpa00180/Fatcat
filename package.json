@@ -9,14 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest",
+    "@tailwindcss/postcss": "^4.2.1",
     "gray-matter": "^4.0.3",
+    "lucide-react": "latest",
+    "next": "latest",
     "next-mdx-remote": "^6.0.0",
-    "lucide-react": "latest"
+    "react": "latest",
+    "react-dom": "latest"
   },
-"devDependencies": {
+  "devDependencies": {
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
