@@ -5,7 +5,8 @@ import Link from 'next/link';
 
 export default function Home() {
   // 1. Đọc danh sách file trong thư mục content
-  const contentDir = path.join(process.cwd(), 'src/content');
+  // Thay thế đoạn định nghĩa path cũ bằng đoạn này:
+const contentDir = path.join(process.cwd(), 'src', 'content');
   const files = fs.readdirSync(contentDir);
 
   const posts = files.map((filename) => {
