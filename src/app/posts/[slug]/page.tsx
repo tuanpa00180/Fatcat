@@ -1,20 +1,25 @@
-// src/app/posts/[slug]/page.tsx
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import { MDXRemote } from 'next-mdx-remote/rsc';
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default async function PostPage({ params }: { params: { slug: string } }) {
+  const { slug } = params;
+  const filePath = path.join(process.cwd(), 'src/content', `${slug}.mdx`);
+  const fileContent = fs.readFileSync(filePath, 'utf-8');
+  const { content, data } = matter(fileContent);
+
   return (
-    <div className="p-10 text-center">
-      <h1 className="text-4xl font-bold text-pink-500 mb-4">
-        🐱 Đang đọc bài: {params.slug}
-      </h1>
-      <div className="bg-yellow-100 p-6 rounded-3xl border-4 border-black inline-block">
-        <p className="text-lg">
-          Chào Sen! Đây là nội dung của bài viết về QA. 
-          Hệ thống đang được chú mèo béo cấu hình...
-        </p>
+    <article className="max-w-3xl mx-auto p-10">
+      <div className="card-fat-cat bg-white">
+        <h1 className="text-4xl font-black mb-4 text-pink-600">{data.title}</h1>
+        <p className="text-gray-400 italic mb-8 border-b pb-4">{data.date}</p>
+        
+        {/* Render nội dung Markdown */}
+        <div className="prose prose-slate lg:prose-xl">
+          <MDXRemote source={content} />
+        </div>
       </div>
-      <div className="mt-8">
-        <a href="/" className="text-blue-500 underline">🐾 Quay về trang chủ</a>
-      </div>
-    </div>
+    </article>
   );
 }
