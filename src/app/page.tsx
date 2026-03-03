@@ -3,6 +3,8 @@ import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+
 export default function Home() {
   // 1. Đọc danh sách file trong thư mục content
   // Thay thế đoạn định nghĩa path cũ bằng đoạn này:

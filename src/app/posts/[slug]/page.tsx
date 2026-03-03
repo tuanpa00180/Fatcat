@@ -4,6 +4,8 @@ import matter from 'gray-matter';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 export default async function PostPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
 
