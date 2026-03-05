@@ -49,12 +49,21 @@ export default function Home() {
               index % 2 === 0 ? 'md:border-r' : ''
             } border-b md:border-b-0`}
           >
-            <div className="aspect-[16/9] bg-gray-100 overflow-hidden mb-8 relative">
-                {/* Image Placeholder - Sau này bạn thay bằng thẻ Image thực tế */}
-                <div className="absolute inset-0 flex items-center justify-center text-gray-300 font-black text-4xl italic group-hover:scale-110 transition-transform duration-700">
-                   FAT CAT #{index + 1}
-                </div>
-            </div>
+  {/* --- ĐOẠN CODE HIỂN THỊ ẢNH MỚI --- */}
+<div className="aspect-[16/9] bg-gray-100 overflow-hidden mb-8 relative border border-gray-100">
+    {post.frontMatter.image ? (
+      <img 
+        src={post.frontMatter.image} 
+        alt={post.frontMatter.title}
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+      />
+    ) : (
+      // Nếu bài viết quên không thêm ảnh, hiện một ô màu xám có chữ
+      <div className="absolute inset-0 flex items-center justify-center text-gray-300 font-black text-4xl italic uppercase">
+         FAT CAT
+      </div>
+    )}
+</div>
             
             <div className="flex justify-between items-start">
               <div>
