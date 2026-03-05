@@ -11,7 +11,7 @@
   "dependencies": {
     "@tailwindcss/postcss": "^4.2.1",
     "gray-matter": "^4.0.3",
-    "lucide-react": "latest",
+    "lucide-react": "^0.577.0",
     "next": "latest",
     "next-mdx-remote": "^6.0.0",
     "react": "latest",
