@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+/* Thiết lập cơ bản cho Typography */
+@layer base {
+  body {
+    @apply bg-white text-black;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+}
+
+/* Các tiện ích hỗ trợ hiệu ứng 3D (Quan trọng cho hiệu ứng lật sách) */
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+  /* Giúp phần chữ "bay" lên khỏi tấm ảnh */
+  .translate-z-20 {
+    transform: translateZ(60px);
+  }
+}
+
+/* Hiệu ứng lật trang sách khi hover */
+.group:hover .group-hover\:rotate-y-\[-20deg\] {
+  transform: rotateY(-20deg);
+}
