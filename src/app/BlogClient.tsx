@@ -8,11 +8,15 @@ const menuItems = [
   { title: "Xu hướng", sub: ["Công nghệ 2026", "AI trong QA", "UI/UX Trend"] },
   {
     title: "Phát triển cá nhân",
-    sub: ["Kỹ năng mềm", "Quản lý thời gian", "Senior Mindset"],
+    sub: ["Kỹ năng mềm", "Quản lý thời gian", "Senior QA Mindset"],
   },
   {
     title: "Thử thách nhỏ hàng ngày",
-    sub: ["1 Day 1 Bug", "Code Clean", "Daily Yoga"],
+    sub: ["1 Day 1 Bug", "Code Clean", "Daily Challenge"],
+  },
+    {
+    title: "Liên hệ",
+    sub: ["Contact", "About me"],
   },
 ];
 
