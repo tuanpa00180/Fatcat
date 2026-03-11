@@ -24,13 +24,20 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
   return (
     <main className="bg-white text-black min-h-screen font-sans">
       <Navbar />
-      
-      {/* ... Phần Hero ... */}
 
+      {/* --- PHẦN HERO CỦA BẠN --- */}
+      <section className="px-10 py-32 border-b border-gray-100 bg-[#f9f9f9]">
+        <h1 className="text-[12vw] leading-[0.8] font-black uppercase tracking-tighter">
+          Quality <br /> <span className="text-gray-300 italic">Obsessed.</span>
+        </h1>
+      </section>
+
+      {/* --- GRID POSTS: Đây là nơi chúng ta sửa --- */}
       <section className="grid grid-cols-1 md:grid-cols-2">
-        {posts.map((post, index) => (
-          // Gọi Component PostCard đã tách
-          <PostCard key={post.slug} post={post} index={index} />
+        {posts.map((item, index) => (
+          // Chúng ta gọi Component PostCard đã tạo trước đó
+          // Truyền 'item' vào prop 'post' của PostCard
+          <PostCard key={item.slug} post={item} index={index} />
         ))}
       </section>
 
