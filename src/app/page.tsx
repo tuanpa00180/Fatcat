@@ -5,6 +5,16 @@ import BlogClient from './BlogClient';
 
 export const dynamic = 'force-dynamic';
 
+// Thêm Interface này vào trên cùng file page.tsx nếu chưa có
+interface Post {
+  slug: string;
+  frontMatter: {
+    title: string;
+    date: string;
+    image?: string;
+    description: string;
+  };
+}
 export default function Home() {
   const contentDir = path.join(process.cwd(), 'src', 'content');
   
@@ -15,14 +25,17 @@ export default function Home() {
 
   const files = fs.readdirSync(contentDir);
 
-  const posts = files
-    .filter(file => file.endsWith('.mdx'))
-    .map((filename) => {
-      const slug = filename.replace('.mdx', '');
-      const markdownWithMeta = fs.readFileSync(path.join(contentDir, filename), 'utf-8');
-      const { data: frontMatter } = matter(markdownWithMeta);
-      return { slug, frontMatter };
-    });
+const posts: Post[] = files.map((filename) => {
+    const slug = filename.replace('.mdx', '');
+    const markdownWithMeta = fs.readFileSync(path.join(contentDir, filename), 'utf-8');
+    const { data } = matter(markdownWithMeta);
+    
+    // Ép kiểu (Type Casting) ở đây để khớp với Post interface
+    return { 
+      slug, 
+      frontMatter: data as Post['frontMatter'] 
+    };
+  });
 
   return <BlogClient posts={posts} />;
 }
