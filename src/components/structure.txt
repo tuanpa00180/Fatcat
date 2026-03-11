@@ -1,0 +1,6 @@
+src/
+ └── components/
+      ├── ui/             <-- Các thành phần nhỏ nhất (Atoms: Button, Badge, Input)
+      ├── layouts/        <-- Các khối lớn cố định (Navbar, Footer, Sidebar)
+      ├── blog/           <-- Các thành phần đặc thù cho Blog (PostCard, PostGrid)
+      └── animations/     <-- Các hiệu ứng Motion (BookFlip, RevealText)
