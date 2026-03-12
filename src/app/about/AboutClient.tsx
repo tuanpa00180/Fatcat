@@ -13,12 +13,12 @@ import {
 const socialLinks = [
   {
     icon: <Linkedin size={20} />,
-    link: "https://linkedin.com/in/yourprofile",
+    link: "https://www.linkedin.com/in/tuan-phan-anh-500730111/",
     label: "LinkedIn",
   },
   {
     icon: <Facebook size={20} />,
-    link: "https://facebook.com/yourpage",
+    link: "https://www.facebook.com/share/1AKb5YKvN8/?mibextid=wwXIfr",
     label: "Facebook",
   },
   {
@@ -26,19 +26,19 @@ const socialLinks = [
     link: "https://instagram.com/yourhandle",
     label: "Instagram",
   },
-  { icon: <Mail size={20} />, link: "mailto:your@email.com", label: "Email" },
+  { icon: <Mail size={20} />, link: "mailto:tuanpa1@email.com", label: "Email" },
 ];
 
 const experiences = [
   {
-    year: "2024 — Present",
-    role: "Senior QA Engineer",
-    company: "Big Tech Corp",
+    year: "2022 — Present",
+    role: "Senior Automation & Manual QA Engineer",
+    company: "Bfast System",
     desc: "Dẫn dắt đội ngũ 10 tester, tối ưu hóa quy trình automation.",
   },
   {
-    year: "2022 — 2024",
-    role: "QA Automation",
+    year: "2021 — 2022",
+    role: "QA Lead",
     company: "Startup Vibe",
     desc: "Xây dựng framework từ con số 0.",
   },
