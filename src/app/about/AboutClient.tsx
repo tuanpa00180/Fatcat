@@ -34,14 +34,33 @@ const experiences = [
     year: "2022 — Present",
     role: "Senior Automation & Manual QA Engineer",
     company: "Bfast System",
-    desc: "Dẫn dắt đội ngũ 10 tester, tối ưu hóa quy trình automation.",
+    desc: "Dẫn dắt đội ngũ 12 tester, tối ưu hóa quy trình automation.",
   },
   {
-    year: "2021 — 2022",
+    year: "2020 — 2022",
     role: "QA Lead",
-    company: "Startup Vibe",
-    desc: "Xây dựng framework từ con số 0.",
+    company: "CMC Global",
+    desc: "Logistic - xây dựng framework từ con số 0.",
   },
+    {
+    year: "2019 — 2020",
+    role: "Senior Data QA",
+    company: "Viettel Telecom - Data Analysis Center ",
+    desc: "Chuyển đổi dữ liệu số.",
+  },
+  {
+    year: "2018",
+    role: "Senior Tester",
+    company: "Panasonic R&D Center",
+    desc: "Automotive and Internet Of Think.",
+  },
+    {
+    year: "2015 — 2018",
+    role: "Tester/Test Lead",
+    company: "FPT Software - IVS ",
+    desc: "Automotive and Internet Of Think.",
+  },
+
 ];
 
 const certifications = [
