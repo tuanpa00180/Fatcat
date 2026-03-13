@@ -28,7 +28,7 @@ export default function BlogClient({ posts }: { posts: Post[] }) {
       {/* --- PHẦN HERO CỦA BẠN --- */}
       <section className="px-10 py-32 border-b border-gray-100 bg-[#f9f9f9]">
         <h1 className="text-[12vw] leading-[0.8] font-black uppercase tracking-tighter">
-          Quality <br /> <span className="text-gray-300 italic">Obsessed.</span>
+          Quality <br /> <span className="text-gray-300 italic">Control.</span>
         </h1>
       </section>
 

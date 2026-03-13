@@ -65,7 +65,7 @@ const experiences = [
 
 const certifications = [
   {
-    title: "ISTQB Full Advanced Level",
+    title: "ISTQB Test Manager Advanced Level",
     provider: "ISTQB Org",
     icon: <Award className="text-pink-500" />,
   },
@@ -92,7 +92,7 @@ export default function AboutClient() {
           {...fadeInUp}
           className="text-[15vw] leading-[0.8] font-black uppercase tracking-tighter mb-10"
         >
-          The <br /> <span className="text-pink-600">Architect.</span>
+          The <br /> <span className="text-pink-600">Quality Architect.</span>
         </motion.h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20 mt-20">

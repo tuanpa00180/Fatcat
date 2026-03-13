@@ -4,8 +4,8 @@ import { useState } from "react";
 
 const menuItems = [
   { title: "Xu hướng", sub: ["Công nghệ 2026", "AI trong QA", "UI/UX Trend"] },
-  { title: "Phát triển cá nhân", sub: ["Kỹ năng mềm", "Quản lý thời gian", "Senior Mindset"] },
-  { title: "Thử thách nhỏ hàng ngày", sub: ["1 Day 1 Bug", "Code Clean", "Daily Yoga"] }
+  { title: "Phát triển cá nhân", sub: ["Kỹ năng mềm", "Quản lý thời gian", "Senior Mindset", "Sức khỏe là nhất"] },
+  { title: "Thử thách nhỏ hàng ngày", sub: ["1 Day 1 Bug", "Code Clean", "Daily Exercise"] }
 ];
 
 export default function Navbar() {
