@@ -1,4 +1,6 @@
 "use client";
+import { useRouter } from 'next/navigation'; // 1. Import router
+import { ArrowLeft } from 'lucide-react';    // 2. Dùng icon cho xịn (Cài: npm install lucide-react)
 import { useEffect, useState } from "react";
 import ChallengeForm from "./ChallengeForm";
 import Calendar from "./Calendar";
@@ -26,6 +28,14 @@ export default function HealthPage() {
 
   return (
     <div className="min-h-screen bg-stone-50 pb-20">
+    {/* NÚT BACK XỊN XÒ */}
+      <button 
+        onClick={() => router.back()} // Hoặc router.push('/') nếu muốn cố định về Home
+        className="fixed top-8 left-8 z-50 group flex items-center gap-3 bg-white border-4 border-black p-3 px-5 font-black uppercase tracking-tighter shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
+      >
+        <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+        <span>Rời khỏi phòng tập</span>
+      </button>
       <div className="max-w-5xl mx-auto p-6 space-y-16">
         {/* HEADER ĐÃ ĐƯỢC CHUỐT LẠI */}
         <header className="relative pt-10 text-center">
