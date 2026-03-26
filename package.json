@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.2.1",
+    "@types/uuid": "^11.0.0",
     "date-fns": "^4.1.0",
     "framer-motion": "^12.35.0",
     "gray-matter": "^4.0.3",
@@ -18,7 +19,8 @@
     "next": "latest",
     "next-mdx-remote": "^6.0.0",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@types/node": "latest",
