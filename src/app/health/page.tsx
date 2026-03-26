@@ -7,6 +7,7 @@ import Calendar from "./Calendar";
 
 export default function HealthPage() {
   const [challenges, setChallenges] = useState<any[]>([]);
+  const router = useRouter(); // 3. Khởi tạo router
 
   const fetchChallenges = async () => {
     const res = await fetch("/api/challenges");
@@ -27,7 +28,7 @@ export default function HealthPage() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50 pb-20">
+    <div className="min-h-screen bg-stone-50 pb-20 relative">
     {/* NÚT BACK XỊN XÒ */}
       <button 
         onClick={() => router.back()} // Hoặc router.push('/') nếu muốn cố định về Home
