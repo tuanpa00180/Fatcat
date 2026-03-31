@@ -33,6 +33,10 @@ export default function HealthPage() {
     if (res.ok) fetchChallenges(); // Reload dữ liệu để thấy quả bóng vàng
   };
 
+  // LOGIC SENIOR: Tách biệt dữ liệu "Đang thực hiện"
+  // Việc filter ở đây giúp UI luôn sạch sẽ mà không mất dữ liệu trong Redis
+  const activeChallenges = challenges.filter((ch) => !ch.isCompleted);
+
   return (
     <div className="min-h-screen bg-stone-50 pb-20 relative">
       {/* NÚT BACK XỊN XÒ */}
@@ -102,45 +106,49 @@ export default function HealthPage() {
           </div>
           {/* CỘT PHẢI: DANH SÁCH THỬ THÁCH */}
           <section className="space-y-10">
-            <div className="flex items-center gap-4">
-              <h2 className="text-2xl font-black uppercase text-slate-800">
-                Thử thách đang chạy
-              </h2>
-              <div className="flex-1 h-[2px] bg-slate-200"></div>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <h2 className="text-2xl font-black uppercase text-slate-800">
+                  Mục tiêu đang chạy
+                </h2>
+                <span className="bg-slate-200 text-slate-600 px-2 py-0.5 rounded-md text-xs font-bold">
+                  {activeChallenges.length}
+                </span>
+              </div>
+
+              {/* Link nhanh tới phòng truyền thống để xem lại cúp */}
+              <Link
+                href="/health/trophy"
+                className="text-xs font-bold text-emerald-600 hover:underline uppercase"
+              >
+                Xem thành tựu 🏆
+              </Link>
             </div>
 
-            {challenges.map((ch) => (
-              <div
-                key={ch.id}
-                className="group relative bg-white border-2 border-slate-200 p-8 rounded-2xl hover:border-emerald-500 transition-all shadow-sm hover:shadow-xl"
-              >
-                {/* Badge trạng thái */}
-                <div className="absolute -top-3 right-8 px-4 py-1 bg-emerald-500 text-white text-xs font-black uppercase rounded-full shadow-lg">
-                  Active
-                </div>
-
-                <div className="flex justify-between items-end mb-8">
-                  <div>
-                    <h3 className="text-3xl font-black text-slate-900 mb-1">
-                      {ch.shortDesc}
-                    </h3>
-                    <div className="flex items-center gap-3 text-slate-500 font-bold text-sm">
-                      <span>Mục tiêu: {ch.targetValue} ngày</span>
-                      <span className="h-1 w-1 bg-slate-300 rounded-full"></span>
-                      <span className="text-emerald-600">
-                        Streak: {ch.currentStreak || 0} 🔥
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <Calendar
-                  challengeId={ch.id}
-                  history={ch.history || []}
-                  onCheckIn={(date) => handleCheckIn(ch.id, date)}
-                />
+            {activeChallenges.length === 0 ? (
+              <div className="border-4 border-dashed border-slate-200 p-20 text-center rounded-3xl">
+                <p className="text-slate-400 font-bold italic">
+                  Hết mục tiêu rồi! Tạo thử thách mới để săn cúp đi bạn ơi! 🐱
+                </p>
               </div>
-            ))}
+            ) : (
+              activeChallenges.map((ch) => (
+                <div
+                  key={ch.id}
+                  className="group relative bg-white border-2 border-slate-200 p-8 rounded-2xl shadow-sm"
+                >
+                  {/* Render nội dung thử thách và Calendar ở đây */}
+                  <h3 className="text-3xl font-black text-slate-900 mb-4">
+                    {ch.shortDesc}
+                  </h3>
+                  <Calendar
+                    challengeId={ch.id}
+                    history={ch.history || []}
+                    onCheckIn={(date) => handleCheckIn(ch.id, date)}
+                  />
+                </div>
+              ))
+            )}
           </section>
         </div>
       </div>
