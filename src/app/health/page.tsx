@@ -1,18 +1,24 @@
 "use client";
-import { useRouter } from 'next/navigation'; // 1. Import router
-import { ArrowLeft } from 'lucide-react';    // 2. Dùng icon cho xịn (Cài: npm install lucide-react)
+import { useRouter } from "next/navigation"; // 1. Import router
+import { ArrowLeft } from "lucide-react"; // 2. Dùng icon cho xịn (Cài: npm install lucide-react)
 import { useEffect, useState } from "react";
 import ChallengeForm from "./ChallengeForm";
 import Calendar from "./Calendar";
+import Link from "next/link";
+import { Trophy } from "lucide-react"; // Đảm bảo đã cài lucide-react
 
 export default function HealthPage() {
   const [challenges, setChallenges] = useState<any[]>([]);
   const router = useRouter(); // 3. Khởi tạo router
 
   const fetchChallenges = async () => {
-    const res = await fetch("/api/challenges");
-    const data = await res.json();
-    setChallenges(Array.isArray(data) ? data : []);
+    try {
+      const res = await fetch("/api/challenges");
+      const data = await res.json();
+      setChallenges(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error("Lỗi khi lấy dữ liệu:", error);
+    }
   };
 
   useEffect(() => {
@@ -29,8 +35,8 @@ export default function HealthPage() {
 
   return (
     <div className="min-h-screen bg-stone-50 pb-20 relative">
-    {/* NÚT BACK XỊN XÒ */}
-      <button 
+      {/* NÚT BACK XỊN XÒ */}
+      <button
         onClick={() => router.back()} // Hoặc router.push('/') nếu muốn cố định về Home
         className="fixed top-8 left-8 z-50 group flex items-center gap-3 bg-white border-4 border-black p-3 px-5 font-black uppercase tracking-tighter shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
       >
@@ -67,6 +73,33 @@ export default function HealthPage() {
             <ChallengeForm onRefresh={fetchChallenges} />
           </section>
 
+          <div className="mb-10">
+            <Link
+              href="/health/trophy"
+              className="group block relative overflow-hidden bg-slate-900 border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(255,215,0,1)] transition-all hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none"
+            >
+              <div className="flex items-center justify-between relative z-10">
+                <div className="flex items-center gap-4">
+                  <div className="bg-yellow-400 p-3 rounded-xl border-2 border-black group-hover:rotate-12 transition-transform">
+                    <Trophy className="w-8 h-8 text-black" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-black text-white uppercase tracking-tight">
+                      Câu lạc bộ Fat Cat QA
+                    </h2>
+                    <p className="text-yellow-400 font-bold text-sm uppercase">
+                      Nơi lưu trữ những thành tựu vĩ đại ➔
+                    </p>
+                  </div>
+                </div>
+                <div className="text-6xl opacity-20 group-hover:opacity-100 transition-opacity">
+                  🏆
+                </div>
+              </div>
+              {/* Hiệu ứng ánh sáng quét qua khi hover */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+            </Link>
+          </div>
           {/* CỘT PHẢI: DANH SÁCH THỬ THÁCH */}
           <section className="space-y-10">
             <div className="flex items-center gap-4">
