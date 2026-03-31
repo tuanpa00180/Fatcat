@@ -9,79 +9,71 @@ interface CalendarProps {
 }
 
 export default function Calendar({ challengeId, history, onCheckIn }: CalendarProps) {
-  // Lấy thời điểm hiện tại để làm mốc
+  // 1. Lấy mốc thời gian LOCAL (tránh dùng UTC để không bị lệch ngày tại Việt Nam)
   const today = new Date();
-  
-  // LOGIC SENIOR: Tạo danh sách 35 ngày (5 tuần) tính từ 7 ngày trước đến 28 ngày sau
-  // Điều này đảm bảo khi bạn ở cuối tháng, bạn vẫn thấy được tuần đầu của tháng sau.
+  today.setHours(0, 0, 0, 0); // Reset giờ về 0 để so sánh chính xác ngày
+
+  // 2. LOGIC MẢNG THỨ CHUẨN: JavaScript quy định 0 = CN, 1 = T2...
+  // Chúng ta sẽ hiển thị từ T2 -> CN để thuận mắt người Việt
+  const weekLabels = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
+
+  // 3. TẠO CỬA SỔ 35 NGÀY (Lấy từ Thứ Hai của tuần trước để lịch luôn thẳng hàng)
   const days = Array.from({ length: 35 }, (_, i) => {
-    const d = new Date();
-    d.setDate(today.getDate() - 7 + i); // Lùi lại 7 ngày để xem lịch sử gần nhất
-    return d.toISOString().split('T')[0];
+    const d = new Date(today);
+    // Tính toán để ngày đầu tiên luôn là Thứ Hai (Monday-centric)
+    const currentDay = today.getDay(); // 0 (CN) -> 6 (T7)
+    const diffToMonday = currentDay === 0 ? 6 : currentDay - 1; 
+    
+    d.setDate(today.getDate() - diffToMonday - 7 + i); // Lùi 1 tuần + khớp về Thứ 2
+    return d;
   });
 
-  const todayStr = today.toISOString().split('T')[0];
+  // Hàm format ngày sang YYYY-MM-DD dựa trên giờ địa phương (Local Time)
+  const formatDate = (date: Date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const todayStr = formatDate(today);
 
   return (
     <div className="bg-white rounded-2xl border-2 border-slate-100 p-6 shadow-inner">
-      <div className="grid grid-cols-7 gap-3">
-        {['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map(d => (
-          <div key={d} className="text-center font-black text-[10px] text-slate-400 uppercase tracking-widest pb-2">
-            {d}
+      {/* HIỂN THỊ TIÊU ĐỀ THỨ */}
+      <div className="grid grid-cols-7 gap-3 mb-2">
+        {weekLabels.map(label => (
+          <div key={label} className={`text-center font-black text-[10px] uppercase tracking-widest ${label === 'CN' ? 'text-pink-500' : 'text-slate-400'}`}>
+            {label}
           </div>
         ))}
-        
-        {days.map(date => {
-          const isChecked = history.includes(date);
-          const isToday = date === todayStr;
-          const isFuture = date > todayStr;
-          const dayNumber = new Date(date).getDate();
-          const monthName = new Date(date).toLocaleString('default', { month: 'short' });
+      </div>
+
+      <div className="grid grid-cols-7 gap-3">
+        {days.map(d => {
+          const dateStr = formatDate(d);
+          const isChecked = history.includes(dateStr);
+          const isToday = dateStr === todayStr;
+          const isFuture = d > today;
+          const dayNumber = d.getDate();
 
           return (
-            <div key={date} className="relative group">
-              <button
-                onClick={() => !isChecked && !isFuture && onCheckIn(date)}
-                disabled={isChecked || isFuture}
-                className={`
-                  h-12 w-full rounded-xl border-2 flex flex-col items-center justify-center font-bold text-xs
-                  transition-all duration-300 relative overflow-hidden
-                  ${isChecked 
-                    ? 'bg-emerald-500 border-emerald-500 text-white shadow-lg shadow-emerald-100' 
-                    : isFuture 
-                      ? 'bg-slate-50 border-slate-50 text-slate-300 cursor-not-allowed'
-                      : 'bg-white border-slate-100 text-slate-600 hover:border-emerald-400 hover:text-emerald-500'}
-                  ${isToday ? 'border-pink-500 ring-2 ring-pink-100' : ''}
-                `}
-              >
-                {/* Hiển thị tên tháng nếu là ngày mùng 1 để dễ nhận biết lật trang */}
-                {dayNumber === 1 && (
-                  <span className="absolute top-1 text-[8px] uppercase opacity-60">{monthName}</span>
-                )}
-                
-                <span className="relative z-10">
-                  {isChecked ? '⚽' : dayNumber}
-                </span>
-
-                {isToday && !isChecked && (
-                  <span className="absolute bottom-1 w-1 h-1 bg-pink-500 rounded-full animate-ping"></span>
-                )}
-              </button>
-            </div>
+            <button
+              key={dateStr}
+              onClick={() => !isChecked && !isFuture && onCheckIn(dateStr)}
+              disabled={isChecked || isFuture}
+              className={`
+                h-12 w-full rounded-xl border-2 flex items-center justify-center font-bold text-xs transition-all
+                ${isChecked ? 'bg-emerald-500 border-emerald-500 text-white shadow-lg' : 
+                  isFuture ? 'bg-slate-50 border-slate-50 text-slate-200' : 
+                  'bg-white border-slate-100 text-slate-600 hover:border-emerald-400'}
+                ${isToday ? 'border-pink-500 ring-4 ring-pink-50 shadow-md' : ''}
+              `}
+            >
+              {isChecked ? '⚽' : dayNumber}
+            </button>
           );
         })}
-      </div>
-      
-      <div className="mt-6 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-400">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-emerald-500 rounded-full"></div> Thành công
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-pink-500 rounded-full"></div> Hôm nay
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-slate-100 border border-slate-200 rounded-full"></div> Sắp tới
-        </div>
       </div>
     </div>
   );
