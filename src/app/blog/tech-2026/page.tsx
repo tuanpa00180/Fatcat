@@ -119,6 +119,8 @@ export default function Tech2026Page() {
   // Chúng ta sẽ gán Grid-Area cho từng thẻ bài viết để kiểm soát vị trí.
   // 6 ô: [Ô FEATURED, Ô DÀI 1, Ô DÀI 2]
   //     [Ô DÀI 5,      Ô DÀI 4, Ô DÀI 3]
+  // 🎯 SẮP XẾP MẢNG AREA ĐÚNG CHIỀU KIM ĐỒNG HỒ
+  // area-1 (Top-Mid) -> area-2 (Top-Right) -> area-3 (Bottom-Right) -> area-4 (Bottom-Mid) -> area-5 (Bottom-Left)
   const areaClasses = ["area-1", "area-2", "area-3", "area-4", "area-5"];
 
   return (
@@ -146,16 +148,16 @@ export default function Tech2026Page() {
           <div className="h-0.5 flex-1 bg-slate-200 rounded-full"></div>
         </header>
 
-        {/* 🎯 GRID SYSTEM V4 */}
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 grid-areas-clockwise">
-          {/* Bài mới nhất chiếm cột đầu tiên (featured) */}
+        {/* Cấu trúc Grid 3 cột x 2 hàng */}
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 grid-areas-clockwise min-h-[600px]">
+          {/* Bài mới nhất: Chiếm trọn cột đầu tiên bên trái (Ô 1,1 và 2,1) */}
           <div className="area-featured h-full">
             <PostCard post={featuredPost} isFeatured />
           </div>
 
-          {/* Các bài viết còn lại tự động vào các khu vực đã định nghĩa */}
+          {/* Các bài còn lại chảy theo Area đã định nghĩa */}
           {otherPosts.slice(0, 5).map((post, index) => (
-            <div key={post.id} className={areaClasses[index]}>
+            <div key={post.id} className={`${areaClasses[index]} h-full`}>
               <PostCard post={post} />
             </div>
           ))}

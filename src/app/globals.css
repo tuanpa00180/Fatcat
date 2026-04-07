@@ -5,7 +5,7 @@
   --grid-template-areas-clockwise: 
     "featured area-1 area-2"
     "featured area-5 area-3"
-    "featured . area-4"; /* Tôi đã sửa để Featured chiếm trọn chiều cao cột 1 */
+    "featured area-5 area-4"; /* area-5 nằm dưới featured, area-4 ở giữa dưới cùng */
 }
 
 /* 🎯 ĐỊNH NGHĨA TIỆN ÍCH GRID */
