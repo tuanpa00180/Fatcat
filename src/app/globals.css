@@ -2,41 +2,33 @@
 
 /* 🎯 ĐỊNH NGHĨA BIẾN THEME */
 @theme {
-  /* Hàng 1: [FEATURED] [AREA-1]   [AREA-2]
-     Hàng 2: [FEATURED] [AREA-5]   [AREA-3]
-     Hàng 3: [AREA-5]   [AREA-5]   [AREA-4] 
-     => Area-5 sẽ "ôm" lấy chân của Featured tạo vòng lặp ngược về bên trái
+  /* Định nghĩa sơ đồ 3x3: 
+     Hàng 1: [FEAT] [A1] [A2]
+     Hàng 2: [FEAT] [A5] [A3]
+     Hàng 3: [A5]   [A5] [A4]
   */
-  --grid-template-areas-tech: 
-    "featured area-1 area-2"
-    "featured area-5 area-3"
-    "area-5    area-5 area-4";
+  --grid-template-tech: 
+    "feat a1 a2"
+    "feat a5 a3"
+    "a5   a5 a4";
 }
 
 @layer utilities {
-  .grid-tech-2026 {
+  .grid-tech-layout {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr; /* Cột 1 to hơn để bài Featured nổi bật */
-    grid-template-rows: repeat(3, 250px); /* 3 hàng, mỗi hàng cao 250px */
-    grid-template-areas: var(--grid-template-areas-tech);
+    grid-template-columns: 1.5fr 1fr 1fr;
+    grid-template-rows: repeat(3, minmax(250px, auto));
+    grid-template-areas: var(--grid-template-tech);
     gap: 1.5rem;
   }
 
-  /* Định nghĩa chính xác tên Area để Map với Code */
-  .area-featured { grid-area: featured; }
-  .area-1 { grid-area: area-1; }
-  .area-2 { grid-area: area-2; }
-  .area-3 { grid-area: area-3; }
-  .area-4 { grid-area: area-4; }
-  .area-5 { grid-area: area-5; }
-}
-
-/* Thiết lập cơ bản cho Typography */
-@layer base {
-  body {
-    @apply bg-white text-black;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  }
+  /* Cực kỳ quan trọng: Tên class phải khớp tuyệt đối với biến trong @theme */
+  .class-featured { grid-area: feat; }
+  .class-area-1 { grid-area: a1; }
+  .class-area-2 { grid-area: a2; }
+  .class-area-3 { grid-area: a3; }
+  .class-area-4 { grid-area: a4; }
+  .class-area-5 { grid-area: a5; }
 }
 
 /* Các tiện ích hỗ trợ hiệu ứng 3D (Quan trọng cho hiệu ứng lật sách) */

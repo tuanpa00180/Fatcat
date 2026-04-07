@@ -116,13 +116,14 @@ export default function Tech2026Page() {
   const [featuredPost, ...otherPosts] = posts;
 
   // 3. LOGIC SẮP XẾP CHUYỂN DỊCH (Grid Area Mapping)
-  // Chúng ta sẽ gán Grid-Area cho từng thẻ bài viết để kiểm soát vị trí.
-  // 6 ô: [Ô FEATURED, Ô DÀI 1, Ô DÀI 2]
-  //     [Ô DÀI 5,      Ô DÀI 4, Ô DÀI 3]
-  // 🎯 SẮP XẾP MẢNG AREA ĐÚNG CHIỀU KIM ĐỒNG HỒ
-  // area-1 (Top-Mid) -> area-2 (Top-Right) -> area-3 (Bottom-Right) -> area-4 (Bottom-Mid) -> area-5 (Bottom-Left)
-  // THỨ TỰ CHẠY THEO KIM ĐỒNG HỒ QUANH BÀI CHÍNH
-  const areaMapping = ["area-1", "area-2", "area-3", "area-4", "area-5"];
+  // Mapping class tương ứng với thứ tự kim đồng hồ quanh bài chính
+  const clockwiseClasses = [
+    "class-area-1", // Next.js (Phải - Trên)
+    "class-area-2", // WASM (Phải - Giữa)
+    "class-area-3", // Tailwind (Phải - Dưới)
+    "class-area-4", // QA Auto (Dưới cùng bên phải)
+    "class-area-5", // Edge Computing (Dưới chân bài Featured)
+  ];
 
   return (
     <div className="min-h-screen bg-stone-50 pb-20">
@@ -149,15 +150,18 @@ export default function Tech2026Page() {
           <div className="h-0.5 flex-1 bg-slate-200 rounded-full"></div>
         </header>
 
-        <section className="grid-tech-2026 mt-12">
-          {/* BÀI VIẾT LỚN NHẤT (PHẢI CÓ CLASS area-featured) */}
-          <div className="area-featured h-full">
+        <section className="grid-tech-layout mt-12">
+          {/* BÀI VIẾT LỚN NHẤT - Cột 1 */}
+          <div className="class-featured w-full h-full">
             <PostCard post={featuredPost} isFeatured={true} />
           </div>
 
-          {/* 5 BÀI CÒN LẠI CHẠY QUANH */}
+          {/* 5 BÀI CÒN LẠI */}
           {otherPosts.slice(0, 5).map((post, index) => (
-            <div key={post.id} className={`${areaMapping[index]} h-full`}>
+            <div
+              key={post.id}
+              className={`${clockwiseClasses[index]} w-full h-full`}
+            >
               <PostCard post={post} isFeatured={false} />
             </div>
           ))}
