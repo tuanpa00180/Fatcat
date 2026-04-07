@@ -122,13 +122,7 @@ export default function Tech2026Page() {
   // 🎯 SẮP XẾP MẢNG AREA ĐÚNG CHIỀU KIM ĐỒNG HỒ
   // area-1 (Top-Mid) -> area-2 (Top-Right) -> area-3 (Bottom-Right) -> area-4 (Bottom-Mid) -> area-5 (Bottom-Left)
   // THỨ TỰ CHẠY THEO KIM ĐỒNG HỒ QUANH BÀI CHÍNH
-  const areaMapping = [
-    "area-1", // Next.js 18.x (Bên phải - Trên)
-    "area-2", // WebAssembly (Bên phải - Giữa/Góc trên phải)
-    "area-3", // Tailwind v5 (Bên phải - Dưới)
-    "area-4", // QA Automation (Bên dưới bên phải)
-    "area-5", // Edge Computing (Bên dưới bài Featured - Bên trái)
-  ];
+  const areaMapping = ["area-1", "area-2", "area-3", "area-4", "area-5"];
 
   return (
     <div className="min-h-screen bg-stone-50 pb-20">
@@ -156,15 +150,15 @@ export default function Tech2026Page() {
         </header>
 
         <section className="grid-tech-2026 mt-12">
-          {/* 1. Bài to nhất */}
+          {/* BÀI VIẾT LỚN NHẤT (PHẢI CÓ CLASS area-featured) */}
           <div className="area-featured h-full">
-            <PostCard post={featuredPost} isFeatured />
+            <PostCard post={featuredPost} isFeatured={true} />
           </div>
 
-          {/* 2. 5 bài vòng quanh */}
+          {/* 5 BÀI CÒN LẠI CHẠY QUANH */}
           {otherPosts.slice(0, 5).map((post, index) => (
             <div key={post.id} className={`${areaMapping[index]} h-full`}>
-              <PostCard post={post} />
+              <PostCard post={post} isFeatured={false} />
             </div>
           ))}
         </section>

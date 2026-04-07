@@ -2,12 +2,12 @@
 
 /* 🎯 ĐỊNH NGHĨA BIẾN THEME */
 @theme {
-  /* Ma trận 3x3:
-     [FEATURED] [COL2-1] [COL2-2] -> Chạy sang phải
-     [FEATURED] [COL3-3] [COL3-1] -> Chạy xuống dưới
-     [COL3-3]   [COL3-3] [COL3-2] -> Vòng sang trái (dưới chân Featured)
+  /* Hàng 1: [FEATURED] [AREA-1]   [AREA-2]
+     Hàng 2: [FEATURED] [AREA-5]   [AREA-3]
+     Hàng 3: [AREA-5]   [AREA-5]   [AREA-4] 
+     => Area-5 sẽ "ôm" lấy chân của Featured tạo vòng lặp ngược về bên trái
   */
-  --grid-template-areas-tech:
+  --grid-template-areas-tech: 
     "featured area-1 area-2"
     "featured area-5 area-3"
     "area-5    area-5 area-4";
@@ -16,42 +16,19 @@
 @layer utilities {
   .grid-tech-2026 {
     display: grid;
-    grid-template-columns: 1.2fr 1fr 1fr;
-    grid-template-rows: 200px 200px 200px;
-    /* Cố định chiều cao hàng để dễ hình dung */
+    grid-template-columns: 1.5fr 1fr 1fr; /* Cột 1 to hơn để bài Featured nổi bật */
+    grid-template-rows: repeat(3, 250px); /* 3 hàng, mỗi hàng cao 250px */
     grid-template-areas: var(--grid-template-areas-tech);
     gap: 1.5rem;
   }
 
-  .area-featured {
-    grid-area: featured;
-  }
-
-  .area-1 {
-    grid-area: area-1;
-  }
-
-  /* Next.js 18.x */
-  .area-2 {
-    grid-area: area-2;
-  }
-
-  /* WebAssembly */
-  .area-3 {
-    grid-area: area-3;
-  }
-
-  /* Tailwind v5 */
-  .area-4 {
-    grid-area: area-4;
-  }
-
-  /* QA Automation */
-  .area-5 {
-    grid-area: area-5;
-  }
-
-  /* Edge Computing */
+  /* Định nghĩa chính xác tên Area để Map với Code */
+  .area-featured { grid-area: featured; }
+  .area-1 { grid-area: area-1; }
+  .area-2 { grid-area: area-2; }
+  .area-3 { grid-area: area-3; }
+  .area-4 { grid-area: area-4; }
+  .area-5 { grid-area: area-5; }
 }
 
 /* Thiết lập cơ bản cho Typography */
