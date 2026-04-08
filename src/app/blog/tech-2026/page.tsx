@@ -112,17 +112,17 @@ const PostCard = ({
 export default function Tech2026Page() {
   const router = useRouter();
 
-  // LOGIC SENIOR: Tách bài mới nhất và các bài còn lại
-  const [featuredPost, ...otherPosts] = posts;
+  // Lấy đúng 6 bài đầu tiên để khớp với ma trận 3x3
+  const displayPosts = posts.slice(0, 6);
+  const featuredPost = displayPosts[0];
+  const otherPosts = displayPosts.slice(1);
 
-  // 3. LOGIC SẮP XẾP CHUYỂN DỊCH (Grid Area Mapping)
-  // Mapping class tương ứng với thứ tự kim đồng hồ quanh bài chính
   const clockwiseClasses = [
-    "class-area-1", // Next.js (Phải - Trên)
-    "class-area-2", // WASM (Phải - Giữa)
-    "class-area-3", // Tailwind (Phải - Dưới)
-    "class-area-4", // QA Auto (Dưới cùng bên phải)
-    "class-area-5", // Edge Computing (Dưới chân bài Featured)
+    "class-area-1", // Bài 2
+    "class-area-2", // Bài 3
+    "class-area-3", // Bài 4
+    "class-area-4", // Bài 5
+    "class-area-5", // Bài 6
   ];
 
   return (
@@ -150,17 +150,17 @@ export default function Tech2026Page() {
           <div className="h-0.5 flex-1 bg-slate-200 rounded-full"></div>
         </header>
 
-        <section className="grid-tech-layout mt-12">
-          {/* BÀI VIẾT LỚN NHẤT - Cột 1 */}
-          <div className="class-featured w-full h-full">
+        <section className="grid-tech-layout">
+          {/* BÀI 1: FEATURED (Luôn phải hiện ở ô feat) */}
+          <div className="class-featured min-h-full">
             <PostCard post={featuredPost} isFeatured={true} />
           </div>
 
-          {/* 5 BÀI CÒN LẠI */}
-          {otherPosts.slice(0, 5).map((post, index) => (
+          {/* BÀI 2-6: CHẠY QUANH */}
+          {otherPosts.map((post, index) => (
             <div
               key={post.id}
-              className={`${clockwiseClasses[index]} w-full h-full`}
+              className={`${clockwiseClasses[index]} min-h-full`}
             >
               <PostCard post={post} isFeatured={false} />
             </div>

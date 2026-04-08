@@ -1,34 +1,44 @@
 @import "tailwindcss";
 
-/* 🎯 ĐỊNH NGHĨA BIẾN THEME */
-@theme {
-  /* Định nghĩa sơ đồ 3x3: 
-     Hàng 1: [FEAT] [A1] [A2]
-     Hàng 2: [FEAT] [A5] [A3]
-     Hàng 3: [A5]   [A5] [A4]
-  */
-  --grid-template-tech: 
-    "feat a1 a2"
-    "feat a5 a3"
-    "a5   a5 a4";
-}
-
 @layer utilities {
   .grid-tech-layout {
     display: grid;
+    /* Ép cứng 3 cột và 3 hàng */
     grid-template-columns: 1.5fr 1fr 1fr;
-    grid-template-rows: repeat(3, minmax(250px, auto));
-    grid-template-areas: var(--grid-template-tech);
+    grid-template-rows: 280px 280px 280px;
+
+    /* Vẽ trực tiếp bản đồ ô ở đây */
+    grid-template-areas:
+      "feat a1 a2"
+      "feat a5 a3"
+      "a5   a5 a4";
     gap: 1.5rem;
   }
 
-  /* Cực kỳ quan trọng: Tên class phải khớp tuyệt đối với biến trong @theme */
-  .class-featured { grid-area: feat; }
-  .class-area-1 { grid-area: a1; }
-  .class-area-2 { grid-area: a2; }
-  .class-area-3 { grid-area: a3; }
-  .class-area-4 { grid-area: a4; }
-  .class-area-5 { grid-area: a5; }
+  /* Định nghĩa lại Area - Đảm bảo tên bên phải trùng khớp với bản đồ trên */
+  .class-featured {
+    grid-area: feat !important;
+  }
+
+  .class-area-1 {
+    grid-area: a1 !important;
+  }
+
+  .class-area-2 {
+    grid-area: a2 !important;
+  }
+
+  .class-area-3 {
+    grid-area: a3 !important;
+  }
+
+  .class-area-4 {
+    grid-area: a4 !important;
+  }
+
+  .class-area-5 {
+    grid-area: a5 !important;
+  }
 }
 
 /* Các tiện ích hỗ trợ hiệu ứng 3D (Quan trọng cho hiệu ứng lật sách) */
