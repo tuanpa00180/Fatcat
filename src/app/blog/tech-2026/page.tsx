@@ -112,19 +112,15 @@ const PostCard = ({
 export default function Tech2026Page() {
   const router = useRouter();
 
-// Đảm bảo bài "Micro-Frontend" là posts[0]
-  // Đảm bảo bài "Next.js" là posts[1]
-  // ... Bài "WASM" là posts[2]
-  
-  const featuredPost = posts[0]; // Bài mới nhất/To nhất
-  const otherPosts = posts.slice(1, 6); // 5 bài tiếp theo
+const [featuredPost, ...otherPosts] = posts;
 
+  // Thứ tự area khớp với sơ đồ 2x2 và vòng quay chữ L
   const clockwisePositions = [
-    "pos-1", // Bài 2 (Next.js) - Trên Giữa
-    "pos-2", // Bài 3 (WASM) - Trên Phải
-    "pos-3", // Bài 4 (Tailwind) - Giữa Phải
-    "pos-4", // Bài 5 (QA Auto) - Dưới Phải
-    "pos-5", // Bài 6 (Edge) - Dưới Giữa (Chân bài chính)
+    "pos-1", // Ô [1,3] - Trên cùng bên phải
+    "pos-2", // Ô [2,3] - Giữa bên phải
+    "pos-3", // Ô [3,3] - Dưới cùng bên phải
+    "pos-4", // Ô [3,2] - Dưới cùng ở giữa
+    "pos-5", // Ô [3,1] - Dưới cùng bên trái
   ];
 
   return (
@@ -152,14 +148,14 @@ export default function Tech2026Page() {
           <div className="h-0.5 flex-1 bg-slate-200 rounded-full"></div>
         </header>
 
-<section className="grid-tech-2026">
-          {/* 🎯 BÀI TO NHẤT: Ép chết vào cột trái */}
-          <div className="pos-main w-full h-full">
+<section className="grid-tech-layout mt-12">
+          {/* LÕI VUÔNG 2x2 */}
+          <div className="pos-featured w-full h-full">
             <PostCard post={featuredPost} isFeatured={true} />
           </div>
 
-          {/* 🎯 5 BÀI CÒN LẠI: Chạy vòng quanh */}
-          {otherPosts.map((post, index) => (
+          {/* 5 BÀI CHỮ L ÔM QUANH */}
+          {otherPosts.slice(0, 5).map((post, index) => (
             <div key={post.id} className={`${clockwisePositions[index]} w-full h-full`}>
                <PostCard post={post} isFeatured={false} />
             </div>
