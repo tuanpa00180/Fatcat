@@ -112,17 +112,19 @@ const PostCard = ({
 export default function Tech2026Page() {
   const router = useRouter();
 
-  // Lấy đúng 6 bài đầu tiên để khớp với ma trận 3x3
-  const displayPosts = posts.slice(0, 6);
-  const featuredPost = displayPosts[0];
-  const otherPosts = displayPosts.slice(1);
+// Đảm bảo bài "Micro-Frontend" là posts[0]
+  // Đảm bảo bài "Next.js" là posts[1]
+  // ... Bài "WASM" là posts[2]
+  
+  const featuredPost = posts[0]; // Bài mới nhất/To nhất
+  const otherPosts = posts.slice(1, 6); // 5 bài tiếp theo
 
-  const clockwiseClasses = [
-    "class-area-1", // Bài 2
-    "class-area-2", // Bài 3
-    "class-area-3", // Bài 4
-    "class-area-4", // Bài 5
-    "class-area-5", // Bài 6
+  const clockwisePositions = [
+    "pos-1", // Bài 2 (Next.js) - Trên Giữa
+    "pos-2", // Bài 3 (WASM) - Trên Phải
+    "pos-3", // Bài 4 (Tailwind) - Giữa Phải
+    "pos-4", // Bài 5 (QA Auto) - Dưới Phải
+    "pos-5", // Bài 6 (Edge) - Dưới Giữa (Chân bài chính)
   ];
 
   return (
@@ -150,19 +152,16 @@ export default function Tech2026Page() {
           <div className="h-0.5 flex-1 bg-slate-200 rounded-full"></div>
         </header>
 
-        <section className="grid-tech-layout">
-          {/* BÀI 1: FEATURED (Luôn phải hiện ở ô feat) */}
-          <div className="class-featured min-h-full">
+<section className="grid-tech-2026">
+          {/* 🎯 BÀI TO NHẤT: Ép chết vào cột trái */}
+          <div className="pos-main w-full h-full">
             <PostCard post={featuredPost} isFeatured={true} />
           </div>
 
-          {/* BÀI 2-6: CHẠY QUANH */}
+          {/* 🎯 5 BÀI CÒN LẠI: Chạy vòng quanh */}
           {otherPosts.map((post, index) => (
-            <div
-              key={post.id}
-              className={`${clockwiseClasses[index]} min-h-full`}
-            >
-              <PostCard post={post} isFeatured={false} />
+            <div key={post.id} className={`${clockwisePositions[index]} w-full h-full`}>
+               <PostCard post={post} isFeatured={false} />
             </div>
           ))}
         </section>

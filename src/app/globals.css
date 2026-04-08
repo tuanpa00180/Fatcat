@@ -1,44 +1,28 @@
 @import "tailwindcss";
 
 @layer utilities {
-  .grid-tech-layout {
+  .grid-tech-2026 {
     display: grid;
-    /* Ép cứng 3 cột và 3 hàng */
+    /* 3 Cột: Cột 1 rộng nhất cho bài Featured */
     grid-template-columns: 1.5fr 1fr 1fr;
-    grid-template-rows: 280px 280px 280px;
-
-    /* Vẽ trực tiếp bản đồ ô ở đây */
-    grid-template-areas:
-      "feat a1 a2"
-      "feat a5 a3"
-      "a5   a5 a4";
+    /* 3 Hàng cố định chiều cao để không bị đè */
+    grid-template-rows: 250px 250px 250px;
+    /* Bản đồ 3x3 chuẩn kim đồng hồ ôm quanh FEATURED */
+    grid-template-areas: 
+      "main top-mid top-right"
+      "main bot-left mid-right"
+      "bot-mid bot-mid bot-right";
     gap: 1.5rem;
   }
 
-  /* Định nghĩa lại Area - Đảm bảo tên bên phải trùng khớp với bản đồ trên */
-  .class-featured {
-    grid-area: feat !important;
-  }
-
-  .class-area-1 {
-    grid-area: a1 !important;
-  }
-
-  .class-area-2 {
-    grid-area: a2 !important;
-  }
-
-  .class-area-3 {
-    grid-area: a3 !important;
-  }
-
-  .class-area-4 {
-    grid-area: a4 !important;
-  }
-
-  .class-area-5 {
-    grid-area: a5 !important;
-  }
+  /* Ép từng class vào đúng vùng trên bản đồ */
+  .pos-main { grid-area: main !important; }
+  .pos-1 { grid-area: top-mid !important; }
+  .pos-2 { grid-area: top-right !important; }
+  .pos-3 { grid-area: mid-right !important; }
+  .pos-4 { grid-area: bot-right !important; }
+  .pos-5 { grid-area: bot-mid !important; }
+  /* pos-5 (bot-mid) sẽ nằm dưới chân bài main */
 }
 
 /* Các tiện ích hỗ trợ hiệu ứng 3D (Quan trọng cho hiệu ứng lật sách) */
