@@ -46,7 +46,7 @@ const posts = [
     id: 6,
     title: "WebAssembly (WASM): Đưa Code Native lên trình duyệt",
     date: "05/03/2026",
-    image: "/images/tech-2026-6.jpg",
+    image: "/images/tech-2026-5.jpg",
     excerpt:
       "Chạy Game 3D, xử lý Video, Machine Learning ngay trên trình duyệt...",
   },
