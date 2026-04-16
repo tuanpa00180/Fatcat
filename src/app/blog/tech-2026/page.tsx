@@ -116,7 +116,7 @@ export default function Tech2026Page() {
 const [featuredPost, ...otherPosts] = posts;
 
 
-  // Thứ tự class tầng (Staircase layers)
+// Thứ tự class cho 5 bài vệ tinh
   const layerClasses = ["layer-1", "layer-2", "layer-3", "layer-4", "layer-5"];
 
   return (
@@ -144,15 +144,15 @@ const [featuredPost, ...otherPosts] = posts;
           <div className="h-0.5 flex-1 bg-slate-200 rounded-full"></div>
         </header>
 
-<section className="grid-staircase mt-20">
-          {/* BÀI FEATURED - GỐC CẦU THANG */}
-          <div className="layer-0 group">
+<section className="grid-staircase mt-24">
+          {/* GỐC CẦU THANG (Tầng dưới cùng) */}
+          <div className="layer-feat">
             <PostCard post={featuredPost} isFeatured={true} />
           </div>
 
-          {/* CÁC BẬC THANG TIẾP THEO */}
+          {/* CÁC BẬC THANG LEO DẦN LÊN (Z-index tăng dần) */}
           {otherPosts.slice(0, 5).map((post, index) => (
-            <div key={post.id} className={`${layerClasses[index]}`}>
+            <div key={post.id} className={layerClasses[index]}>
                <PostCard post={post} isFeatured={false} />
             </div>
           ))}

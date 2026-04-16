@@ -1,29 +1,61 @@
 @import "tailwindcss";
 
-@theme {
-  --grid-template-staircase: 
-    "feat feat a1"
-    "feat feat a2"
-    "a5   a4   a3";
-}
-
 @layer utilities {
   .grid-staircase {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 300px); /* Tăng chiều cao để tạo không gian đè */
-    grid-template-areas: var(--grid-template-staircase);
-    /* Giảm gap hoặc bỏ gap để các thẻ sát nhau hơn trước khi dùng margin âm */
-    gap: 0.5rem; 
+    grid-template-rows: repeat(3, 300px);
+    grid-template-areas: 
+      "feat feat a1"
+      "feat feat a2"
+      "a5   a4   a3";
+    gap: 0; /* Bỏ gap để margin âm kiểm soát hoàn toàn việc gối đầu */
   }
 
-  /* Định nghĩa các tầng (Layer) */
-  .layer-0 { grid-area: feat; z-index: 10; } /* To nhất - Tầng dưới cùng hoặc trên cùng tùy ý bạn */
-  .layer-1 { grid-area: a1; z-index: 20; margin-left: -40px; margin-bottom: -40px; }
-  .layer-2 { grid-area: a2; z-index: 30; margin-top: -20px; margin-left: -20px; }
-  .layer-3 { grid-area: a3; z-index: 40; margin-top: -40px; }
-  .layer-4 { grid-area: a4; z-index: 50; margin-left: 20px; }
-  .layer-5 { grid-area: a5; z-index: 60; margin-top: -60px; }
+  /* CHIẾN THUẬT Z-INDEX TĂNG DẦN:
+     Feat (10) -> a1 (20) -> a2 (30) -> a3 (40) -> a4 (50) -> a5 (60)
+  */
+
+  .layer-feat { 
+    grid-area: feat; 
+    z-index: 10; 
+  }
+
+  .layer-1 { 
+    grid-area: a1; 
+    z-index: 20; 
+    margin-left: -60px; /* Đè lên Feat từ bên phải */
+    margin-bottom: -40px; 
+  }
+
+  .layer-2 { 
+    grid-area: a2; 
+    z-index: 30; 
+    margin-top: -60px;   /* Đè lên a1 */
+    margin-left: -40px;  /* Đè lên Feat */
+  }
+
+  .layer-3 { 
+    grid-area: a3; 
+    z-index: 40; 
+    margin-top: -80px;   /* Đè lên a2 */
+  }
+
+  /* FIX: a4 gối lên a3 */
+  .layer-4 { 
+    grid-area: a4; 
+    z-index: 50; 
+    margin-left: -60px;  /* Đè lên a3 (a4 ở bên trái a3) */
+    margin-top: -20px;   /* Nhích lên một chút để gối đầu */
+  }
+
+  /* FIX: a5 gối lên a4 và trùm lên Feat */
+  .layer-5 { 
+    grid-area: a5; 
+    z-index: 60; 
+    margin-left: 40px;   /* Đè ngược lại vào vùng của a4 */
+    margin-top: -100px;  /* Đè lên chân của Featured */
+  }
 }
 
 /* Các tiện ích hỗ trợ hiệu ứng 3D (Quan trọng cho hiệu ứng lật sách) */
