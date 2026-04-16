@@ -63,11 +63,11 @@ const PostCard = ({
   return (
     <Link
 href={`/blog/${post.id}`} 
-      className={`group block relative bg-white/80 backdrop-blur-md border border-slate-200/60 overflow-hidden transition-all duration-500 
-        hover:-translate-y-2 hover:bg-white
+      className={`group block relative bg-white border border-slate-200/60 overflow-hidden transition-all duration-500 
+        hover:shadow-2xl hover:-translate-y-1
         ${isFeatured 
-          ? 'rounded-[2rem] shadow-2xl shadow-slate-200/50 p-2' 
-          : 'rounded-[1.5rem] shadow-xl shadow-slate-100/40'
+          ? 'rounded-[2.5rem] shadow-[20px_20px_50px_-15px_rgba(0,0,0,0.1)]' 
+          : 'rounded-[1.8rem] shadow-[10px_10px_30px_-10px_rgba(0,0,0,0.08)]'
         } 
         w-full h-full`}
     >

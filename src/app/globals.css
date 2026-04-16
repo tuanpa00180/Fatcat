@@ -12,45 +12,58 @@
     gap: 0;
   }
 
-  /* Hệ thống Layer mềm mại */
+  /* CHIẾN THUẬT GỐI ĐẦU MỚI: Feat > a1 > a2 > a3 > a4 > a5 */
+
   .layer-feat { 
     grid-area: feat; 
-    z-index: 60; 
+    z-index: 100; /* Luôn là tâm điểm trên cùng */
   }
 
   .layer-1 { 
     grid-area: a1; 
-    z-index: 50; 
-    margin-left: -40px; 
+    z-index: 90; 
+    margin-left: -60px; /* Chui dưới Featured */
     margin-bottom: -40px; 
   }
 
   .layer-2 { 
     grid-area: a2; 
-    z-index: 40; 
-    margin-top: -40px; 
-    margin-left: -30px; 
+    z-index: 80; 
+    margin-top: -60px;   /* Chui dưới a1 */
+    margin-left: -40px;  /* Chui dưới Featured */
   }
 
   .layer-3 { 
     grid-area: a3; 
-    z-index: 30; 
-    margin-top: -50px; 
+    z-index: 70; 
+    margin-top: -80px;   /* Chui dưới a2 */
+    margin-left: -30px;  /* BẮT ĐẦU CHUẨN BỊ ĐỂ ĐÈ LÊN a4 */
   }
 
-  /* FIX: a4 gối lên a3 và chuẩn bị đè lên a5 */
+  /* FIX: a3 gối lên a4 */
   .layer-4 { 
     grid-area: a4; 
-    z-index: 20; 
-    margin-left: -50px; /* Đè sang trái, gối lên a5 */
-    margin-top: -20px; 
+    z-index: 60; 
+    /* Để a3 (bên phải) đè lên a4 (bên trái), a3 cần margin-left âm.
+       Hoặc ta dùng margin-right âm cho a4 để nó chui dưới a3. 
+       Cách Senior nhất: Dùng margin-left âm cho a3 và đảm bảo z-index a3 > a4 */
+    margin-left: -50px; /* a4 chui dưới chân của Featured hoặc lấn sang a5 */
+    margin-top: -20px;
   }
 
-  /* a5 nằm dưới cùng, bị cả Feat và a4 đè lên */
+  /* layer-3 cần cập nhật để đè lên layer-4 */
+  .layer-3 { 
+    grid-area: a3; 
+    z-index: 70; 
+    margin-top: -80px; 
+    margin-left: -60px; /* ÉP a3 ĐÈ LÊN a4 */
+  }
+
   .layer-5 { 
     grid-area: a5; 
-    z-index: 10; 
-    margin-top: -60px; /* Chui dưới chân Featured */
+    z-index: 50; 
+    margin-top: -100px; /* Chui dưới Featured */
+    margin-left: 40px;  /* Chui dưới a4 */
   }
 }
 
