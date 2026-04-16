@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+body {
+  background-color: #f1f5f9; /* Slate-100: Màu này giúp PostCard màu trắng nổi bần bật */
+  color: #1e293b;
+}
+
 @layer utilities {
   .grid-staircase {
     display: grid;
@@ -10,6 +15,7 @@
       "feat feat a2"
       "a5   a4   a3";
     gap: 0;
+    padding: 2rem; /* Thêm padding để không bị sát mép màn hình */
   }
 
   /* CHIẾN THUẬT GỐI ĐẦU MỚI: Feat > a1 > a2 > a3 > a4 > a5 */

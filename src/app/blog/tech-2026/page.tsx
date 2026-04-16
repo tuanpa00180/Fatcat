@@ -61,32 +61,51 @@ const PostCard = ({
   isFeatured?: boolean;
 }) => {
   return (
-    <Link
-href={`/blog/${post.id}`} 
-      className={`group block relative bg-white border border-slate-200/60 overflow-hidden transition-all duration-500 
-        hover:shadow-2xl hover:-translate-y-1
+<Link 
+      href={`/blog/${post.id}`} 
+      /* SỬA ĐỔI CHÍNH: 
+         - border-slate-300: Viền rõ ràng hơn.
+         - shadow-[...]: Đổ bóng đa tầng để tạo chiều sâu giữa các layer.
+      */
+      className={`group block relative bg-white border-[1.5px] border-slate-300 overflow-hidden transition-all duration-500 
+        hover:border-emerald-400 hover:-translate-y-2
         ${isFeatured 
-          ? 'rounded-[2.5rem] shadow-[20px_20px_50px_-15px_rgba(0,0,0,0.1)]' 
-          : 'rounded-[1.8rem] shadow-[10px_10px_30px_-10px_rgba(0,0,0,0.08)]'
+          ? 'rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.15),0_10px_10px_rgba(0,0,0,0.05)]' 
+          : 'rounded-[1.8rem] shadow-[0_10px_30px_rgba(0,0,0,0.1),0_4px_6px_rgba(0,0,0,0.05)]'
         } 
         w-full h-full`}
     >
-      <div className={`flex flex-col h-full ${isFeatured ? 'p-6' : 'p-4'}`}>
-        {/* Phần ảnh nên bo góc tròn hơn để trông mềm mại */}
-        <div className={`relative overflow-hidden rounded-2xl ${isFeatured ? 'h-64' : 'h-32'}`}>
+      <div className={`flex flex-col h-full ${isFeatured ? 'p-8' : 'p-5'}`}>
+        {/* Badge cho bài viết */}
+        <div className="mb-4">
+          <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
+            {isFeatured ? 'Featured Story' : 'Tech Note'}
+          </span>
+        </div>
+
+        <div className={`relative overflow-hidden rounded-2xl bg-slate-100 ${isFeatured ? 'h-72' : 'h-36'}`}>
           <Image 
             src={post.image} 
             alt={post.title} 
             fill 
-            className="object-cover group-hover:scale-110 transition-transform duration-700" 
+            className="object-cover group-hover:scale-105 transition-transform duration-700" 
           />
         </div>
         
-        <div className="mt-4 flex-1">
-          <h3 className={`font-bold text-slate-800 group-hover:text-emerald-500 transition-colors ${isFeatured ? 'text-2xl' : 'text-sm line-clamp-2'}`}>
+        <div className="mt-6 flex-1">
+          <h3 className={`font-bold text-slate-800 leading-snug group-hover:text-emerald-600 transition-colors ${isFeatured ? 'text-3xl' : 'text-base line-clamp-2'}`}>
             {post.title}
           </h3>
-          {isFeatured && <p className="mt-2 text-slate-500 text-sm line-clamp-2">{post.excerpt}</p>}
+          {isFeatured && (
+            <p className="mt-4 text-slate-500 leading-relaxed line-clamp-3">
+              {post.excerpt || "Khám phá những bước tiến mới nhất trong kỷ nguyên công nghệ 2026..."}
+            </p>
+          )}
+        </div>
+
+        <div className="mt-6 flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
+          <span>Read More</span>
+          <div className="w-8 h-[1px] bg-slate-200 group-hover:w-12 group-hover:bg-emerald-400 transition-all"></div>
         </div>
       </div>
       <div
