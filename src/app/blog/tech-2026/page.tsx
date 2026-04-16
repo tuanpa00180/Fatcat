@@ -62,15 +62,33 @@ const PostCard = ({
 }) => {
   return (
     <Link
-      href={`/blog/${post.id}`}
-      className={`group block relative bg-white border-[3px] border-slate-900 overflow-hidden transition-all duration-300 
-        ${
-          isFeatured
-            ? "rounded-3xl shadow-[20px_20px_0px_0px_rgba(0,0,0,1)] z-50" // Bóng đổ mạnh hơn cho bài chính
-            : "rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+href={`/blog/${post.id}`} 
+      className={`group block relative bg-white/80 backdrop-blur-md border border-slate-200/60 overflow-hidden transition-all duration-500 
+        hover:-translate-y-2 hover:bg-white
+        ${isFeatured 
+          ? 'rounded-[2rem] shadow-2xl shadow-slate-200/50 p-2' 
+          : 'rounded-[1.5rem] shadow-xl shadow-slate-100/40'
         } 
         w-full h-full`}
     >
+      <div className={`flex flex-col h-full ${isFeatured ? 'p-6' : 'p-4'}`}>
+        {/* Phần ảnh nên bo góc tròn hơn để trông mềm mại */}
+        <div className={`relative overflow-hidden rounded-2xl ${isFeatured ? 'h-64' : 'h-32'}`}>
+          <Image 
+            src={post.image} 
+            alt={post.title} 
+            fill 
+            className="object-cover group-hover:scale-110 transition-transform duration-700" 
+          />
+        </div>
+        
+        <div className="mt-4 flex-1">
+          <h3 className={`font-bold text-slate-800 group-hover:text-emerald-500 transition-colors ${isFeatured ? 'text-2xl' : 'text-sm line-clamp-2'}`}>
+            {post.title}
+          </h3>
+          {isFeatured && <p className="mt-2 text-slate-500 text-sm line-clamp-2">{post.excerpt}</p>}
+        </div>
+      </div>
       <div
         className={`flex ${isFeatured ? "flex-col h-full" : "items-center h-full gap-5 p-4"}`}
       >

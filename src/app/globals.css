@@ -4,66 +4,53 @@
   .grid-staircase {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 300px);
-    grid-template-areas:
+    grid-template-rows: repeat(3, 280px);
+    grid-template-areas: 
       "feat feat a1"
       "feat feat a2"
       "a5   a4   a3";
     gap: 0;
   }
 
-  /* CHIẾN THUẬT Z-INDEX ĐẢO NGƯỢC:
-     Featured (100) -> a1 (80) -> a2 (60) -> a3 (40) -> a4 (20) -> a5 (10)
-  */
-
-  .layer-feat {
-    grid-area: feat;
-    z-index: 100;
-    /* Cao nhất để đè lên tất cả */
-    position: relative;
+  /* Hệ thống Layer mềm mại */
+  .layer-feat { 
+    grid-area: feat; 
+    z-index: 60; 
   }
 
-  .layer-1 {
-    grid-area: a1;
-    z-index: 80;
-    margin-left: -50px;
-    /* Chui dưới Featured */
-    margin-bottom: -30px;
+  .layer-1 { 
+    grid-area: a1; 
+    z-index: 50; 
+    margin-left: -40px; 
+    margin-bottom: -40px; 
   }
 
-  .layer-2 {
-    grid-area: a2;
-    z-index: 60;
-    margin-top: -50px;
-    /* Chui dưới a1 */
-    margin-left: -30px;
-    /* Chui dưới Featured */
+  .layer-2 { 
+    grid-area: a2; 
+    z-index: 40; 
+    margin-top: -40px; 
+    margin-left: -30px; 
   }
 
-  .layer-3 {
-    grid-area: a3;
-    z-index: 40;
-    margin-top: -60px;
-    /* Chui dưới a2 */
+  .layer-3 { 
+    grid-area: a3; 
+    z-index: 30; 
+    margin-top: -50px; 
   }
 
-  /* a4 gối đầu lên a3 (a3 nằm dưới a4) */
-  .layer-4 {
-    grid-area: a4;
-    z-index: 20;
-    margin-left: 40px;
-    /* Đè lên a3 */
-    margin-top: -15px;
+  /* FIX: a4 gối lên a3 và chuẩn bị đè lên a5 */
+  .layer-4 { 
+    grid-area: a4; 
+    z-index: 20; 
+    margin-left: -50px; /* Đè sang trái, gối lên a5 */
+    margin-top: -20px; 
   }
 
-  /* a5 nằm thấp nhất, bị Featured và a4 đè lên */
-  .layer-5 {
-    grid-area: a5;
-    z-index: 10;
-    margin-top: -80px;
-    /* Chui xuống dưới Featured */
-    margin-left: 30px;
-    /* Chui dưới a4 */
+  /* a5 nằm dưới cùng, bị cả Feat và a4 đè lên */
+  .layer-5 { 
+    grid-area: a5; 
+    z-index: 10; 
+    margin-top: -60px; /* Chui dưới chân Featured */
   }
 }
 
