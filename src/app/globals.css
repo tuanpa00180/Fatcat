@@ -5,56 +5,65 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 300px);
-    grid-template-areas: 
+    grid-template-areas:
       "feat feat a1"
       "feat feat a2"
       "a5   a4   a3";
-    gap: 0; /* Bỏ gap để margin âm kiểm soát hoàn toàn việc gối đầu */
+    gap: 0;
   }
 
-  /* CHIẾN THUẬT Z-INDEX TĂNG DẦN:
-     Feat (10) -> a1 (20) -> a2 (30) -> a3 (40) -> a4 (50) -> a5 (60)
+  /* CHIẾN THUẬT Z-INDEX ĐẢO NGƯỢC:
+     Featured (100) -> a1 (80) -> a2 (60) -> a3 (40) -> a4 (20) -> a5 (10)
   */
 
-  .layer-feat { 
-    grid-area: feat; 
-    z-index: 10; 
+  .layer-feat {
+    grid-area: feat;
+    z-index: 100;
+    /* Cao nhất để đè lên tất cả */
+    position: relative;
   }
 
-  .layer-1 { 
-    grid-area: a1; 
-    z-index: 20; 
-    margin-left: -60px; /* Đè lên Feat từ bên phải */
-    margin-bottom: -40px; 
+  .layer-1 {
+    grid-area: a1;
+    z-index: 80;
+    margin-left: -50px;
+    /* Chui dưới Featured */
+    margin-bottom: -30px;
   }
 
-  .layer-2 { 
-    grid-area: a2; 
-    z-index: 30; 
-    margin-top: -60px;   /* Đè lên a1 */
-    margin-left: -40px;  /* Đè lên Feat */
+  .layer-2 {
+    grid-area: a2;
+    z-index: 60;
+    margin-top: -50px;
+    /* Chui dưới a1 */
+    margin-left: -30px;
+    /* Chui dưới Featured */
   }
 
-  .layer-3 { 
-    grid-area: a3; 
-    z-index: 40; 
-    margin-top: -80px;   /* Đè lên a2 */
+  .layer-3 {
+    grid-area: a3;
+    z-index: 40;
+    margin-top: -60px;
+    /* Chui dưới a2 */
   }
 
-  /* FIX: a4 gối lên a3 */
-  .layer-4 { 
-    grid-area: a4; 
-    z-index: 50; 
-    margin-left: -60px;  /* Đè lên a3 (a4 ở bên trái a3) */
-    margin-top: -20px;   /* Nhích lên một chút để gối đầu */
+  /* a4 gối đầu lên a3 (a3 nằm dưới a4) */
+  .layer-4 {
+    grid-area: a4;
+    z-index: 20;
+    margin-left: 40px;
+    /* Đè lên a3 */
+    margin-top: -15px;
   }
 
-  /* FIX: a5 gối lên a4 và trùm lên Feat */
-  .layer-5 { 
-    grid-area: a5; 
-    z-index: 60; 
-    margin-left: 40px;   /* Đè ngược lại vào vùng của a4 */
-    margin-top: -100px;  /* Đè lên chân của Featured */
+  /* a5 nằm thấp nhất, bị Featured và a4 đè lên */
+  .layer-5 {
+    grid-area: a5;
+    z-index: 10;
+    margin-top: -80px;
+    /* Chui xuống dưới Featured */
+    margin-left: 30px;
+    /* Chui dưới a4 */
   }
 }
 

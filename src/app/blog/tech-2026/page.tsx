@@ -62,10 +62,13 @@ const PostCard = ({
 }) => {
   return (
     <Link
-href={`/blog/${post.id}`} 
+      href={`/blog/${post.id}`}
       className={`group block relative bg-white border-[3px] border-slate-900 overflow-hidden transition-all duration-300 
-        hover:-translate-y-2 hover:-translate-x-1 hover:shadow-[12px_12px_0px_0px_rgba(16,185,129,1)]
-        ${isFeatured ? 'rounded-3xl shadow-[16px_16px_0px_0px_rgba(0,0,0,1)]' : 'rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'}
+        ${
+          isFeatured
+            ? "rounded-3xl shadow-[20px_20px_0px_0px_rgba(0,0,0,1)] z-50" // Bóng đổ mạnh hơn cho bài chính
+            : "rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+        } 
         w-full h-full`}
     >
       <div
@@ -113,10 +116,9 @@ href={`/blog/${post.id}`}
 export default function Tech2026Page() {
   const router = useRouter();
 
-const [featuredPost, ...otherPosts] = posts;
+  const [featuredPost, ...otherPosts] = posts;
 
-
-// Thứ tự class cho 5 bài vệ tinh
+  // Thứ tự class cho 5 bài vệ tinh
   const layerClasses = ["layer-1", "layer-2", "layer-3", "layer-4", "layer-5"];
 
   return (
@@ -144,7 +146,7 @@ const [featuredPost, ...otherPosts] = posts;
           <div className="h-0.5 flex-1 bg-slate-200 rounded-full"></div>
         </header>
 
-<section className="grid-staircase mt-24">
+        <section className="grid-staircase mt-24">
           {/* GỐC CẦU THANG (Tầng dưới cùng) */}
           <div className="layer-feat">
             <PostCard post={featuredPost} isFeatured={true} />
@@ -153,7 +155,7 @@ const [featuredPost, ...otherPosts] = posts;
           {/* CÁC BẬC THANG LEO DẦN LÊN (Z-index tăng dần) */}
           {otherPosts.slice(0, 5).map((post, index) => (
             <div key={post.id} className={layerClasses[index]}>
-               <PostCard post={post} isFeatured={false} />
+              <PostCard post={post} isFeatured={false} />
             </div>
           ))}
         </section>
