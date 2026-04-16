@@ -62,10 +62,11 @@ const PostCard = ({
 }) => {
   return (
     <Link
-      href={`/blog/${post.id}`}
-      className={`group block relative bg-white border-2 border-slate-200 overflow-hidden transition-all hover:border-emerald-500 shadow-sm ${
-        isFeatured ? "rounded-2xl h-full" : "rounded-xl h-[120px]"
-      }`}
+href={`/blog/${post.id}`} 
+      className={`group block relative bg-white border-[3px] border-slate-900 overflow-hidden transition-all duration-300 
+        hover:-translate-y-2 hover:-translate-x-1 hover:shadow-[12px_12px_0px_0px_rgba(16,185,129,1)]
+        ${isFeatured ? 'rounded-3xl shadow-[16px_16px_0px_0px_rgba(0,0,0,1)]' : 'rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'}
+        w-full h-full`}
     >
       <div
         className={`flex ${isFeatured ? "flex-col h-full" : "items-center h-full gap-5 p-4"}`}
@@ -114,14 +115,9 @@ export default function Tech2026Page() {
 
 const [featuredPost, ...otherPosts] = posts;
 
-  // Thứ tự area khớp với sơ đồ 2x2 và vòng quay chữ L
-  const clockwisePositions = [
-    "pos-1", // Ô [1,3] - Trên cùng bên phải
-    "pos-2", // Ô [2,3] - Giữa bên phải
-    "pos-3", // Ô [3,3] - Dưới cùng bên phải
-    "pos-4", // Ô [3,2] - Dưới cùng ở giữa
-    "pos-5", // Ô [3,1] - Dưới cùng bên trái
-  ];
+
+  // Thứ tự class tầng (Staircase layers)
+  const layerClasses = ["layer-1", "layer-2", "layer-3", "layer-4", "layer-5"];
 
   return (
     <div className="min-h-screen bg-stone-50 pb-20">
@@ -148,15 +144,15 @@ const [featuredPost, ...otherPosts] = posts;
           <div className="h-0.5 flex-1 bg-slate-200 rounded-full"></div>
         </header>
 
-<section className="grid-tech-layout mt-12">
-          {/* LÕI VUÔNG 2x2 */}
-          <div className="pos-featured w-full h-full">
+<section className="grid-staircase mt-20">
+          {/* BÀI FEATURED - GỐC CẦU THANG */}
+          <div className="layer-0 group">
             <PostCard post={featuredPost} isFeatured={true} />
           </div>
 
-          {/* 5 BÀI CHỮ L ÔM QUANH */}
+          {/* CÁC BẬC THANG TIẾP THEO */}
           {otherPosts.slice(0, 5).map((post, index) => (
-            <div key={post.id} className={`${clockwisePositions[index]} w-full h-full`}>
+            <div key={post.id} className={`${layerClasses[index]}`}>
                <PostCard post={post} isFeatured={false} />
             </div>
           ))}

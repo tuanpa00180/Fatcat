@@ -1,34 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-  /* Vẽ lại ma trận 3x3:
-     [FEAT] [FEAT] [A1]
-     [FEAT] [FEAT] [A2]
-     [A5]   [A4]   [A3]
-  */
-  --grid-template-tech: 
+  --grid-template-staircase: 
     "feat feat a1"
     "feat feat a2"
     "a5   a4   a3";
 }
 
 @layer utilities {
-  .grid-tech-layout {
+  .grid-staircase {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* Ép chiều cao cố định để tạo thành các ô vuông hoàn hảo */
-    grid-template-rows: repeat(3, 280px); 
-    grid-template-areas: var(--grid-template-tech);
-    gap: 1.5rem;
+    grid-template-rows: repeat(3, 300px); /* Tăng chiều cao để tạo không gian đè */
+    grid-template-areas: var(--grid-template-staircase);
+    /* Giảm gap hoặc bỏ gap để các thẻ sát nhau hơn trước khi dùng margin âm */
+    gap: 0.5rem; 
   }
 
-  /* Định nghĩa chính xác từng Area */
-  .pos-featured { grid-area: feat !important; }
-  .pos-1 { grid-area: a1 !important; }
-  .pos-2 { grid-area: a2 !important; }
-  .pos-3 { grid-area: a3 !important; }
-  .pos-4 { grid-area: a4 !important; }
-  .pos-5 { grid-area: a5 !important; }
+  /* Định nghĩa các tầng (Layer) */
+  .layer-0 { grid-area: feat; z-index: 10; } /* To nhất - Tầng dưới cùng hoặc trên cùng tùy ý bạn */
+  .layer-1 { grid-area: a1; z-index: 20; margin-left: -40px; margin-bottom: -40px; }
+  .layer-2 { grid-area: a2; z-index: 30; margin-top: -20px; margin-left: -20px; }
+  .layer-3 { grid-area: a3; z-index: 40; margin-top: -40px; }
+  .layer-4 { grid-area: a4; z-index: 50; margin-left: 20px; }
+  .layer-5 { grid-area: a5; z-index: 60; margin-top: -60px; }
 }
 
 /* Các tiện ích hỗ trợ hiệu ứng 3D (Quan trọng cho hiệu ứng lật sách) */
