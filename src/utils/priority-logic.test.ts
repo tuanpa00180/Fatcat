@@ -1,16 +1,15 @@
-// src/utils/priority-logic.test.ts
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from 'vitest'; // Import trực tiếp ở đây
 import { sortTasks } from './priority-logic';
 import { Task } from '@/data/task-store';
 
-describe('Kiểm tra logic sắp xếp', () => {
-  it('phải đưa nhiệm vụ ưu tiên 1 lên trước ưu tiên 2', () => {
-    const mockTasks = [
-      { id: 'A', priority: 2, createdAt: new Date() },
-      { id: 'B', priority: 1, createdAt: new Date() }
+describe('Hàm sortTasks', () => {
+  it('nên ưu tiên nhiệm vụ mức 1 lên trên mức 4', () => {
+    const tasks = [
+      { id: '1', priority: 4, createdAt: new Date('2026-01-01') },
+      { id: '2', priority: 1, createdAt: new Date('2026-01-01') }
     ] as Task[];
     
-    const result = sortTasks(mockTasks);
-    expect(result[0].id).toBe('B');
+    const result = sortTasks(tasks);
+    expect(result[0].priority).toBe(1);
   });
 });
