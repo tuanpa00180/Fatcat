@@ -1,4 +1,5 @@
 // src/data/task-store.ts
+
 export type Priority = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export interface Task {
@@ -13,19 +14,15 @@ export interface Task {
   lastDescriptionChange?: string;
 }
 
-// Giả lập Database trong bộ nhớ
-export const tasks: Task[] = []; 
+// Khởi tạo danh sách trống
+export const tasks: Task[] = [];
 
-/**
- * Tìm kiếm nhiệm vụ theo ID
- */
+// Hàm hỗ trợ tìm kiếm nhanh
 export const getPostById = (id: string): Task | undefined => {
-  return tasks.find(task => task.id === id);
+  return tasks.find(t => t.id === id);
 };
 
-/**
- * Lưu hoặc cập nhật nhiệm vụ
- */
+// Hàm lưu trữ
 export const saveTask = (taskData: Task) => {
   const index = tasks.findIndex(t => t.id === taskData.id);
   if (index !== -1) {
