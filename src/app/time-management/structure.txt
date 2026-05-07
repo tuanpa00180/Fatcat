@@ -1,0 +1,20 @@
+src/
+├── app/ (Routing Layer - Định nghĩa các con đường dẫn)
+│   └── time-management/
+│       ├── page.tsx               # Cổng vào: Chọn Công việc 🐃 hoặc Cá nhân 🐱
+│       └── [type]/                # Folder động: Xử lý logic theo loại (work/personal)
+│           ├── page.tsx           # Trang danh sách: Hiển thị 20 items, lọc và sắp xếp
+│           └── [id]/              # Folder động: Định danh từng nhiệm vụ
+│               └── page.tsx       # Trang Form: Chế độ Tạo mới (new) hoặc Chỉnh sửa
+│
+├── components/ (UI Layer - Các viên gạch xây dựng giao diện)
+│   ├── TaskCard.tsx               # Hiển thị thông tin tóm tắt từng nhiệm vụ
+│   └── TaskPopup.tsx              # Popup cảnh báo "Địa ngục" hoặc "Nằm thẳng"
+│
+├── data/ (Data Layer - Kho chứa dữ liệu và hợp đồng dữ liệu)
+│   └── task-store.ts              # "Backend giả lập": Lưu trữ mảng tasks, hàm lưu/lấy data
+│
+└── utils/ (Logic Layer - Bộ não xử lý các thuật toán)
+    ├── priority-logic.ts          # Thuật toán sắp xếp ưu tiên & kiểm tra giới hạn (Limit 20)
+    ├── priority-logic.test.ts     # Unit test đảm bảo thuật toán sắp xếp luôn đúng
+    └── ui-logic.test.ts           # Unit test đảm bảo nút bấm khóa/mở đúng điều kiện
